@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const CardPizza = ({ name, price, ingredients, img }) => (
   <div className="card">
     <img src={img} alt={name} />
