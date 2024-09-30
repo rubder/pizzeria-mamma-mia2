@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 
 const RegisterPage = () => {
+  const { token } = useUser();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (token) {
+      navigate('/'); 
+    }
+  }, [token, navigate]);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -25,8 +35,9 @@ const RegisterPage = () => {
       return;
     }
 
-    // Si todas las validaciones pasan
+    
     setMessage('Registro exitoso.');
+    
   };
 
   return (

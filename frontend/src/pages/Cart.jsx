@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useCart } from '../context/CartContext';
-
+import { UserContext } from '../context/UserContext'; 
 const Cart = () => {
     const { cart, addToCart, removeFromCart, calculateTotal } = useCart();
-
+    const { token } = useContext(UserContext); 
     return (
         <div>
             <h2>Carrito de Compras</h2>
@@ -23,7 +23,9 @@ const Cart = () => {
                 <p>El carrito está vacío.</p>
             )}
             <h2 style={{ color: 'black' }}>Total: ${calculateTotal()}</h2>
-            {cart.length > 0 && <button>Pagar</button>}
+            <button disabled={!token} style={{ opacity: token ? 1 : 0.5 }}>
+                Pagar
+            </button>
         </div>
     );
 };

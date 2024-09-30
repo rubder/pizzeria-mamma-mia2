@@ -21,11 +21,12 @@ const Home = () => {
                 {pizzas.map(pizza => (
                     <CardPizza
                         key={pizza.id}
+                        id={pizza.id} 
                         name={`🍕 ${pizza.name.charAt(0).toUpperCase() + pizza.name.slice(1)}`}
                         price={pizza.price}
                         ingredients={pizza.ingredients}
                         img={pizza.img}
-                        onAddToCart={() => addToCart(pizza)} 
+                        onAddToCart={() => addToCart(pizza)}
                     />
                 ))}
             </div>
