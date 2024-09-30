@@ -8,10 +8,11 @@ import Pizza from './pages/Pizza';
 import Profile from './components/Profile';
 import Notfound from './components/Notfound';
 import { Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext'; 
 
 function App() {
   return (
-    <>
+    <CartProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -20,10 +21,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/pizza/:id" element={<Pizza />} />
         <Route path="/profile" element={<Profile />} />
-  {/* Página de error 404 /invalid-path*/}
         <Route path="*" element={<Notfound />} />
       </Routes>
-    </>
+    </CartProvider>
   );
 }
 
