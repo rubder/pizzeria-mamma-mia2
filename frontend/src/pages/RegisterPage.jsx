@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 const RegisterPage = () => {
-  const { token } = useUser();
+  const { register, token } = useUser(); 
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,10 +16,10 @@ const RegisterPage = () => {
     }
   }, [token, navigate]);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Validaciones
+    
     if (!email || !password || !confirmPassword) {
       setMessage('Todos los campos son obligatorios.');
       return;
@@ -36,8 +36,7 @@ const RegisterPage = () => {
     }
 
     
-    setMessage('Registro exitoso.');
-    
+    await register(email, password);
   };
 
   return (

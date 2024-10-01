@@ -2,10 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { useUser } from '../context/UserContext'; 
 import { useCart } from '../context/CartContext'; 
+
 const Navbar = () => {
     const navigate = useNavigate(); 
     const { cart, calculateTotal } = useCart(); 
-    const { token } = useUser(); 
+    const { token, logout } = useUser(); 
+    const handleLogout = () => {
+        logout(); 
+        navigate('/login'); 
+    };
 
     return (
         <nav>
@@ -15,10 +20,7 @@ const Navbar = () => {
             {token ? (
                 <>
                     <button onClick={() => navigate('/profile')}>🔓 Profile</button>
-                    <button onClick={() => { 
-                        localStorage.removeItem('token'); 
-                        navigate('/login'); 
-                    }}>🔒 Logout</button>
+                    <button onClick={handleLogout}>🔒 Logout</button> 
                 </>
             ) : (
                 <>
@@ -32,7 +34,7 @@ const Navbar = () => {
                 onClick={() => navigate('/cart')}
             >
                 🛒 Total: ${calculateTotal()} 
-                <p>Items en el carrito: {cart.length}</p>
+                
             </button>
         </nav>
     );

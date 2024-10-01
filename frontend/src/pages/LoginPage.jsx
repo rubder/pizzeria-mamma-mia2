@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 const LoginPage = () => {
-  const { token } = useUser();
+  const { login, token } = useUser();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const LoginPage = () => {
     }
   }, [token, navigate]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -28,8 +28,8 @@ const LoginPage = () => {
       return;
     }
 
-    setMessage('Login exitoso.');
-    
+  
+    await login(email, password);
   };
 
   return (
